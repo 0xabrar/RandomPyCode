@@ -1,4 +1,4 @@
-# an example for raw_input and int conversion
+#ArithmeticProject
 #Abrar Hussain
 
 num1 = int(raw_input('Please enter an integer: '))
