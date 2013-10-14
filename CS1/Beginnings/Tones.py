@@ -1,9 +1,5 @@
 # Tones Project
 # Abrar Hussain
-''' This code redundancy could significantly be reduced with function
-usage. But, alas, program speicifications. 
-Future: One function with octave and pitch class as function parameters.
-'''
 
 from math import pow
 from winsound import Beep
@@ -28,7 +24,6 @@ def play_frequency() -> None:
 
     print (str(octave) + " . " + str(pitch_class) + " equals "
            + str(C_nought) + " Hertz.")
-
     # note is played for 2 seconds
     Beep(C_nought, 2000)
 
