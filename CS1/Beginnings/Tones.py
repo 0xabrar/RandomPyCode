@@ -6,53 +6,42 @@ Future: One function with octave and pitch class as function parameters.
 '''
 
 from math import pow
-import winsound
-
-print("This program can convert octave/pitchclass pairs" +
-      " into their appropriate Hertz values. It uses the" +
-      " tempered scale conversions. The frequencies will also be played.")
+from winsound import Beep
 
 
-# First note
-octave_one = int(input("Give me an octave: "))
-pitch_one = int(input("Give me a pitch class: "))
+def play_frequency() -> None:
+    ''' Asks users for an octave and a pitch class and then converts
+    it to the according frequency. The frequency is displayed.
+    The frequency will then be played.
 
-octave_differenc = octave_one - 4
-pitch_difference = pitch_one - 9
-C_nought = 440 * pow(2, (octave_differenc +
-                    (pitch_difference / 12)))
+    >>> play_frequency(4, 9)
+    '4 . 9 equals 440.0 Hertz.
 
-print (str(octave_one) + " . " + str(pitch_one) + " equals "
-       + str(C_nought))
-winsound.Beep(int(C_nought), 2000)
+    '''
+    octave = int(input("Give me an octave: "))
+    pitch_class = int(input("Give me a pitch class: "))
 
-# Second note
-print("Let's do that again shall we.")
-octave_two = int(input("Give me an octave: "))
-pitch_two = int(input("Give me a pitch class: "))
+    octave_difference = octave - 4
+    pitch_difference = pitch_class - 9
+    C_nought = int(440 * pow(2, (octave_difference +
+                        (pitch_difference / 12))))
 
-octave_differenc = octave_two - 4
-pitch_difference = pitch_two - 9
-C_nought = 440 * pow(2, (octave_differenc +
-                    (pitch_difference / 12)))
+    print (str(octave) + " . " + str(pitch_class) + " equals "
+           + str(C_nought) + " Hertz.")
 
-print (str(octave_two) + " . " + str(pitch_two) + " equals "
-       + str(C_nought))
-winsound.Beep(int(C_nought), 2000)
-
-# Third note
-print("One more time.")
-octave_three = int(input("Give me an octave: "))
-pitch_three = int(input("Give me a pitch class: "))
-
-octave_differenc = octave_three - 4
-pitch_difference = pitch_three - 9
-C_nought = 440 * pow(2, (octave_differenc +
-                    (pitch_difference / 12)))
-
-print (str(octave_three) + " . " + str(pitch_three) + " equals "
-       + str(C_nought))
-winsound.Beep(int(C_nought), 2000)
+    # note is played for 2 seconds
+    Beep(C_nought, 2000)
 
 
-print("Well that's it for my program. Arigatou gozaimasu!")
+if __name__ == '__main__':
+
+    print("This program can convert octave/pitchclass pairs" +
+          " into their appropriate Hertz values. It uses the" +
+          " tempered scale conversions. The frequencies will also be played.")
+
+    # 3 frequenies played
+    play_frequency()
+    play_frequency()
+    play_frequency()
+
+    print("Well that's it for my program. Arigatou gozaimasu!")
