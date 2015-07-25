@@ -39,7 +39,7 @@ class Form:
 class DynamicForm(Form):
 
 	def __init__(self, labels=None):
-		labels = input("Enter field names: ")
+		labels = input("Enter field names: ").split()
 		Form.__init__(self, labels)
 
 	def on_submit(self):
