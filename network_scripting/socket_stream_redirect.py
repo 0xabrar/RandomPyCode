@@ -29,7 +29,7 @@ def redirect_out(port=port, host=host):
     start caller after listener started, else connect fails before accept
     """
     sockobj = socket(AF_INET, SOCK_STREAM)
-    sockobj.bind((host, port))
+    sockobj.connect((host, port))
     sock_file = sockobj.makefile("w")  # make prints go to sock.send
     sys.stdout = sock_file
     return sockobj
@@ -63,7 +63,7 @@ def redirect_both_as_client(port=port, host=host):
     return sockobj
 
 
-def redirect_both_as_sever(port=port, host=host):
+def redirect_both_as_server(port=port, host=host):
     """
     connect caller's standard input stream and output stream to same socket
     in this mode, caller is server to a client: receives messages, send reply

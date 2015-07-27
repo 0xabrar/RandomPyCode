@@ -1,7 +1,7 @@
 #!/usr/loca/bin/python
 """
 ################################################################
-Download and play a media file by FTP, using ftplib.
+Download and play a media file by FTP, using ftplib, from a URL.
 Change filename and sitename accordingly. 
 ################################################################
 """
@@ -14,7 +14,7 @@ nonpassive = False	# force active mode FTP for server?
 filename = "monkeys.jpg"
 dirname = "."
 sitename = "ftp.rmi.net"
-userinfo = ('lutz', getpass("Pswd?"))
+userinfo = ('what', getpass("Pswd?"))
 if len(sys.argv) > 1: filename = sys.argv[1]
 
 print("Connecting...")

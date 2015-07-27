@@ -47,7 +47,7 @@ def client2():
     redirect_in()
     for x in range(3):
         data = input()  # input from socket
-        print("client %s got [%s]" % s(pid, data))
+        print("client %s got [%s]" % (pid, data))
 
 ###########################################################
 # redirect client input + output, client is socket client
