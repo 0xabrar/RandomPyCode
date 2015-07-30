@@ -6,7 +6,7 @@ user=(name, pswd) tuple. Self-test FTPs a test file and site.
 from ftplib import FTP
 from os.path import exists
 
-def getfile(file, site, dir, user()), *, verbose=True, refetch=False):
+def getfile(file, site, dir, user, *, verbose=True, refetch=False):
 	"""
 	fetch a file by ftp from a site/directory
 	anonymous or real login, binary transfer
