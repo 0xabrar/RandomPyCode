@@ -26,6 +26,8 @@ def connect_db():
     return rv
 
 
+
+
 def init_db():
     """Initializes the database."""
     db = get_db()
