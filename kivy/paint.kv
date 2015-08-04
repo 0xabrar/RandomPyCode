@@ -17,6 +17,20 @@
 				name: "paint"
 				PaintWidget:
 					id: my_canvas
+			Screen:
+				name: "rotate_button"
+				FloatLayout
+					Button:
+						text: "I'm rotated"
+						size_hint: None, None
+						pos_hint: {"center_x": 0.5, "center_y": 0.5}
+						canvas.before:
+							PushMatrix
+							Rotate:	
+								angle: 45
+								origin: self.center
+						canvas.after: 
+							PopMatrix
 	AnchorLayout:
 		anchor_x: "center"
 		anchor_y: "bottom"
@@ -25,8 +39,10 @@
 			size_hint: 1, 0.1
 			Button:
 				text: "Menu"
-				on_press: root.clear_canvas(); manager.current = "menu"
+				on_press: root.clear_canvas(); manager.current = "men"
 			Button:
 				text: "Paint"
 				on_press: manager.current = "paint"
-
+			Button:
+				text: "Rotate"
+				on_press: root.clear_canvas(); manager.current = "rotate_button"
