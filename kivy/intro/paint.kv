@@ -1,48 +1,43 @@
-<Menu>:
+<Label>:
+	font_name: "Roboto"
+	font_size: 60
+	markup: True	
 
-	paint_canvas: my_canvas
 
-	AnchorLayout:
-		anchor_x: "center"
-		anchor_y: "top"
-		ScreenManager:
-			size_hint: 1, 0.9
-			id: manager
-			Screen: 
-				name: "menu"
-				Label:
-					markup: True
-					text: "[size=30]Welcome to Paint![/size]"
-			Screen:
-				name: "paint"
-				PaintWidget:
-					id: my_canvas
-			Screen:
-				name: "rotate_button"
-				FloatLayout
-					Button:
-						text: "I'm rotated"
-						size_hint: None, None
-						pos_hint: {"center_x": 0.5, "center_y": 0.5}
-						canvas.before:
-							PushMatrix
-							Rotate:	
-								angle: 45
-								origin: self.center
-						canvas.after: 
-							PopMatrix
-	AnchorLayout:
-		anchor_x: "center"
-		anchor_y: "bottom"
-		BoxLayout: 
-			orientation: "horizontal"
-			size_hint: 1, 0.1
-			Button:
-				text: "Menu"
-				on_press: root.clear_canvas(); manager.current = "men"
-			Button:
-				text: "Paint"
-				on_press: manager.current = "paint"
-			Button:
-				text: "Rotate"
-				on_press: root.clear_canvas(); manager.current = "rotate_button"
+<RobotoButton@Button>:
+	font_name: "Roboto"
+	font_size: 25
+	bold: True
+
+	background_normal: "button_normal1.png"
+	background_down: "button_down.png"
+	border: (2, 2, 2, 2)
+
+BoxLayout:
+
+	orienation: "vertical"
+	
+	Label:
+		id: time
+		text: "[b]00[/b]:00:00"
+
+	BoxLayout:
+		height: 90
+		orienation: "horizontal"
+		padding: 20
+		spacing: 20
+		size_hint: (1, None)
+
+		RobotoButton:
+			text: "Start"
+	
+		RobotoButton:
+			text: "Reset"
+
+	Label:
+		id: stopwatch
+		text: "00:00. [size=40]00[/size]"
+
+
+
+
