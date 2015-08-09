@@ -39,7 +39,7 @@ class ChatApp(App):
         reactor.connectTCP(host, 9096,
                            ChatClientFactory(self))
 
-    def on_connect(self):
+    def on_connect(self, conn):
         self.conn = conn
         self.root.current = "chatroom"
 
@@ -61,3 +61,9 @@ class ChatApp(App):
             del self.conn
         self.root.current = "login"
         self.root.ids.chat_logs.text = ""
+
+if __name__ == '__main__':
+    Config.set('graphics', 'width', '600')
+    Config.set('graphics', 'height', '900')
+
+    ChatApp().run()

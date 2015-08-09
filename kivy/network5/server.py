@@ -2,6 +2,12 @@ from twisted.internet import protocol, reactor
 import itertools
 
 
+def esc_markup(msg):
+    return (msg.replace('&', '&amp;')
+            .replace('[', '&bl;')
+            .replace(']', '&br;'))
+
+
 transports = set()
 
 colors = itertools.cycle(("7F8C8D", "C0392B", "2C3E50", "8E44AD", "27AE60"))
@@ -11,7 +17,6 @@ class Chat(protocol.Protocol):
 
     def connectionMade(self):
         self.color = colors.next()
-        colors.insert(0, self.color)
 
     def dataReceived(self, data):
         transports.add(self.transport)
