@@ -7,11 +7,17 @@ from kivy.app import App
 from kivy.config import Config
 
 
+def esc_markup(msg):
+    return (msg.replace("&", "&amp;")
+            .replace("[", "&bl;")
+            .replace("]", "&br;"))
+
+
 class ChatClient(protocol.Protocol):
 
     def connectionMade(self):
         self.transport.write("CONNECT")
-        self.factor.app.on_connect(self.transport)
+        self.factory.app.on_connect(self.transport)
 
     def dataReceived(self, data):
         self.factory.app.on_message(data)
@@ -29,7 +35,9 @@ class ChatApp(App):
     def connect(self):
         host = self.root.ids.server.text
         self.nick = self.root.ids.nickname.text
-        reactor.connectTCP(host, 9096, ChatClientFactory(self))
+        print("-- connecting to " + host)
+        reactor.connectTCP(host, 9096,
+                           ChatClientFactory(self))
 
     def on_connect(self):
         self.conn = conn
@@ -37,14 +45,17 @@ class ChatApp(App):
 
     def send_message(self):
         msg = self.root.ids.message.text
-        self.conn.write("%s:%s" (self.nick, msg))
-        self.roots.ids.chat_logs.text += ("%s says: %s\n" % (self.nick, msg))
+        self.conn.write("%s:%s" % (self.nick, msg))
+        self.root.ids.chat_logs.text += (
+            "[b][color=2980B9]%s:[/color][/b] %s\n" %
+            (self.nick, esc_markup(msg)))
         self.root.ids.message.text = ""
 
     def on_message(self, msg):
-        self.roots.ids.chat_logs.text += msg + "\n"
+        self.root.ids.chat_logs.text += msg + "\n"
 
     def disconnect(self):
+        print("-- disconnecting")
         if self.conn:
             self.conn.loseConnection()
             del self.conn

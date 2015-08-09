@@ -1,15 +1,18 @@
-from twisted.internet import reactor, protocol
+import select
+import socket
+import sys
 
-class ChatClientFactory(protocol.ClientFactory):
-	protocol = ChatClient
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect(("127.0.0.1", 9096))
+s.send("CONNECT")
 
-	def __init__(self, app):
-		self.app = app
-
-class ChatClient(protocol.Protocol):
-	def connectionMade(self):
-		self.transport.write("CONNECT")
-		self.factor.app.on_connect(self.transport)
-
-	def dataReceived(self, data):
-		self.factory.app.on_message(data)
+rlist = (sys.stdin, s)
+while 1:
+    read, write, fail = select.select(rlist, (), ())
+    for sock in read:
+        if sock == s:  # receive message from server
+            data = s.recv(4096)
+            print(data)
+        else:  # send message entered by user
+            msg = sock.readline()
+            s.send(msg)
