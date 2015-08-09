@@ -1,0 +1,3 @@
+title=Redcordist
+author=Abrar Hussain
+orienation=portrait
