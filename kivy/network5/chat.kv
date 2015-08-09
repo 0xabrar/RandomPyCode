@@ -1,0 +1,76 @@
+#:import RiseInTransition kivy.uix.screenmanager RiseInTransition
+#:import DampedScrollEffect kivy.effects DampedScrollEffect
+#:import C kivy.utils.get_color_from_hex
+
+<TextInput>:
+	multiline: False
+	padding: [10, 0.5 * (self.height - self.line_height)]
+
+<ChatLabel@Label>:
+	text_size: (self.width, None)
+	color: C("#101010")
+	halign: "left"
+	valign: "top"
+	size_hint: (1, None)
+	height: self.texture_size[1]
+
+ScreenManager:
+	transition: RiseInTransition()
+	Screen: 
+		name: "login"
+	
+		BoxLayout:
+			orienation: "vertical"
+			GridLayout:
+				Label:
+					text: "Server"
+
+				TextInput:
+					id: server
+					text: "127.0.0.1"
+				Label: 
+					text: "Nickname"
+				TextInput:
+					id: nickname
+					text: "Kivy"
+			Button:
+				text: "Connect"
+				on_press: app.connect()
+
+	Screen:
+		name: "chatoorm"
+
+		BoxLayout:
+			orientation: "vertical"
+			
+			Button: 
+				text: "Disconnect"
+				on_press: app.disconnect()
+
+
+			ScrollView:
+				canvas.before:
+					rgb: 1, 1, 1
+				Rectangle: 
+					pos: self.pos
+					size: self.size
+
+				effect_cls: DampedScrollEffect()
+				ChatLabel:
+					id: chat_logs
+					text: "Insert very long with with line\nbreaks"
+
+			BoxLayout:
+				height: 90
+				orienation: "horizontal"
+				padding: 0
+				size_hint: (1, None)
+
+				TextInput:
+					id: message
+					on_text_validate: app.send_message()
+
+				Button:
+					text: "Send"
+					size_hint: (0.3, 1)
+					on_press: app.send_message()
