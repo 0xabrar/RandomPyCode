@@ -1,0 +1,3 @@
+title=Clock
+author=Abrar Hussain
+orienation=portrait
