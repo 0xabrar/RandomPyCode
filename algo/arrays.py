@@ -7,14 +7,14 @@ def largestNumber(self, A):
     
 def maxSubArray(self, A):
 
-#negatives extra check
-if all(v < 0 for v in A):
-    return max(A)
+	#negatives extra check
+	if all(v < 0 for v in A):
+	    return max(A)
 
-max_a = 0
-max_b = 0
-# b empties to 0 when sequence is bad (not best)
-for x in A:
-    max_b = max(max_b + x, 0)
-    max_a = max(max_a, max_b)
-return max_a
+	max_a = 0
+	max_b = 0
+	# b empties to 0 when sequence is bad (not best)
+	for x in A:
+	    max_b = max(max_b + x, 0)
+	    max_a = max(max_a, max_b)
+	return max_a
